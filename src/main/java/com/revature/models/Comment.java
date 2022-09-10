@@ -22,7 +22,7 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	@JsonBackReference
-	private User user;
+	private Users Users;
 	@Column(nullable = false)
 	private int gameId;
 	@Column(nullable = false)
@@ -32,17 +32,17 @@ public class Comment {
 		super();
 	}
 
-	public Comment(User user, int gameId, String comment) {
+	public Comment(Users Users, int gameId, String comment) {
 		super();
-		this.user = user;
+		this.Users = Users;
 		this.gameId = gameId;
 		this.comment = comment;
 	}
 
-	public Comment(int id, User user, int gameId, String comment) {
+	public Comment(int id, Users Users, int gameId, String comment) {
 		super();
 		this.id = id;
-		this.user = user;
+		this.Users = Users;
 		this.gameId = gameId;
 		this.comment = comment;
 	}
@@ -55,12 +55,12 @@ public class Comment {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public Users getUsers() {
+		return Users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(Users Users) {
+		this.Users = Users;
 	}
 
 	public int getGameId() {
@@ -81,7 +81,7 @@ public class Comment {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(comment, gameId, id, user);
+		return Objects.hash(comment, gameId, id, Users);
 	}
 
 	@Override
@@ -94,12 +94,12 @@ public class Comment {
 			return false;
 		Comment other = (Comment) obj;
 		return Objects.equals(comment, other.comment) && gameId == other.gameId && id == other.id
-				&& Objects.equals(user, other.user);
+				&& Objects.equals(Users, other.Users);
 	}
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", user=" + user + ", gameId=" + gameId + ", comment=" + comment + "]";
+		return "Comment [id=" + id + ", Users=" + Users + ", gameId=" + gameId + ", comment=" + comment + "]";
 	}
 
 }

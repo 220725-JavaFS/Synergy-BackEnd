@@ -23,7 +23,7 @@ public class Favorite {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	@JsonBackReference
-	private User user;
+	private Users Users;
 	@Column(nullable = false)
 	private int gameId;
 
@@ -31,16 +31,16 @@ public class Favorite {
 		super();
 	}
 
-	public Favorite(User user, int gameId) {
+	public Favorite(Users Users, int gameId) {
 		super();
-		this.user = user;
+		this.Users = Users;
 		this.gameId = gameId;
 	}
 
-	public Favorite(int id, User user, int gameId) {
+	public Favorite(int id, Users Users, int gameId) {
 		super();
 		this.id = id;
-		this.user = user;
+		this.Users = Users;
 		this.gameId = gameId;
 	}
 
@@ -52,12 +52,12 @@ public class Favorite {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public Users getUsers() {
+		return Users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(Users Users) {
+		this.Users = Users;
 	}
 
 	public int getGameId() {
@@ -70,7 +70,7 @@ public class Favorite {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(gameId, id, user);
+		return Objects.hash(gameId, id, Users);
 	}
 
 	@Override
@@ -82,12 +82,12 @@ public class Favorite {
 		if (getClass() != obj.getClass())
 			return false;
 		Favorite other = (Favorite) obj;
-		return gameId == other.gameId && id == other.id && Objects.equals(user, other.user);
+		return gameId == other.gameId && id == other.id && Objects.equals(Users, other.Users);
 	}
 
 	@Override
 	public String toString() {
-		return "Favorite [id=" + id + ", user=" + user + ", gameId=" + gameId + "]";
+		return "Favorite [id=" + id + ", Users=" + Users + ", gameId=" + gameId + "]";
 	}
 
 }
