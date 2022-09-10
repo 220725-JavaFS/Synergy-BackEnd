@@ -23,7 +23,7 @@ public class Rating {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	@JsonBackReference
-	private Users Users;
+	private Users users;
 	@Column(nullable = false)
 	private int gameId;
 	@Column(nullable = false)
@@ -35,15 +35,15 @@ public class Rating {
 
 	public Rating(Users Users, int gameId, int rating) {
 		super();
-		this.Users = Users;
+		this.users = Users;
 		this.gameId = gameId;
 		this.rating = rating;
 	}
 
-	public Rating(int id, Users Users, int gameId, int rating) {
+	public Rating(int id, Users users, int gameId, int rating) {
 		super();
 		this.id = id;
-		this.Users = Users;
+		this.users = users;
 		this.gameId = gameId;
 		this.rating = rating;
 	}
@@ -57,11 +57,11 @@ public class Rating {
 	}
 
 	public Users getUsers() {
-		return Users;
+		return users;
 	}
 
-	public void setUsers(Users Users) {
-		this.Users = Users;
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 
 	public int getGameId() {
@@ -82,7 +82,7 @@ public class Rating {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(gameId, id, rating, Users);
+		return Objects.hash(gameId, id, rating, users);
 	}
 
 	@Override
@@ -94,12 +94,12 @@ public class Rating {
 		if (getClass() != obj.getClass())
 			return false;
 		Rating other = (Rating) obj;
-		return gameId == other.gameId && id == other.id && rating == other.rating && Objects.equals(Users, other.Users);
+		return gameId == other.gameId && id == other.id && rating == other.rating && Objects.equals(users, other.users);
 	}
 
 	@Override
 	public String toString() {
-		return "Rating [id=" + id + ", Users=" + Users + ", gameId=" + gameId + ", rating=" + rating + "]";
+		return "Rating [id=" + id + ", Users=" + users + ", gameId=" + gameId + ", rating=" + rating + "]";
 	}
 
 }
