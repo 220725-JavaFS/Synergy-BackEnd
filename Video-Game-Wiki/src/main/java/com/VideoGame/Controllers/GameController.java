@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,10 +32,16 @@ import com.VideoGame.Repositories.GameRepository;
  * with declarative validation constraints and the runtime enforces them. 
  * There are a number of built-in constraints you can can take advantage of. 
  * You may also define your own custom constraints.
+ * 
+ * CrossOrigin
+ * Annotation for permitting cross-origin requests on specific handler 
+ * classes and/or handler methods. Processed if an appropriate HandlerMapping 
+ * is configured.
  */
 
 @RestController
 @RequestMapping("https://api.igdb.com/v4")
+@CrossOrigin
 public class GameController {
 	@Autowired
 	private GameRepository GR;
@@ -83,4 +90,6 @@ public class GameController {
 		response.put("deleted", Boolean.TRUE);
 		return response;
 	}
+	
+	
 }
