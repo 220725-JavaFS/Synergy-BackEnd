@@ -32,7 +32,7 @@ public class Comment {
 		super();
 	}
 
-	public Comment(Users Users, int gameId, String comment) {
+	public Comment(Users users, int gameId, String comment) {
 		super();
 		this.users = users;
 		this.gameId = gameId;
