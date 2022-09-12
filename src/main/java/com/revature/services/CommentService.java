@@ -29,8 +29,9 @@ public class CommentService {
 		}
 	}
 
-	public Comment addOrUpdateComment(Comment comment) {
-		return commentRepo.save(comment);
+	public List<Comment> addOrUpdateComment(Comment comment) {
+		commentRepo.save(comment);
+		return findCommentsByGameId(comment.getGameId());
 	}
 
 	public void deleteCommentById(int id) {

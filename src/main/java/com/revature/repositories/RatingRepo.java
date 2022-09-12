@@ -9,4 +9,5 @@ import com.revature.models.Rating;
 
 public interface RatingRepo extends JpaRepository<Rating, Integer> {
 	Optional<List<Rating>> findByGameId(int gameId);
+	Optional<Rating> findByGameIdAndUsersId(int gameId, int usersId);
 }

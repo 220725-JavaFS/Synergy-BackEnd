@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Rating;
+import com.revature.models.Users;
 import com.revature.services.RatingService;
 
 @RestController
-@RequestMapping("/ratings/{gameId}")
+@RequestMapping("/ratings")
 @CrossOrigin
 public class RatingController {
 	private RatingService ratingService;
@@ -29,11 +30,21 @@ public class RatingController {
 		this.ratingService = ratingService;
 	}
 	
-	@GetMapping
+	@GetMapping("/{gameId}")
 	public ResponseEntity<List<Rating>> getRatingsByGameId(@PathVariable int gameId) {
 		List<Rating> ratings = ratingService.findRatingsByGameId(gameId);
 		return ResponseEntity.status(HttpStatus.OK).body(ratings);
 	}
+	
+	@GetMapping("/{gameId}/{usersId}")
+	public ResponseEntity<Rating> getRatingsByGameIdAndUsers(@PathVariable int gameId, @PathVariable int usersId) {
+		Rating rating = ratingService.findRatingByGameIdAndUsersId(gameId, usersId);
+		if(rating == null) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(rating);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(rating);
+	}
+	
 	
 	@PostMapping
 	public  ResponseEntity<Rating> createRating(@RequestBody Rating rating) {
@@ -44,7 +55,7 @@ public class RatingController {
 	@PutMapping
 	public  ResponseEntity<Rating> updateRating(@RequestBody Rating rating) {
 		Rating dbrating = ratingService.addOrUpdateRating(rating);
-		return ResponseEntity.status(HttpStatus.CREATED).body(dbrating);
+		return ResponseEntity.status(HttpStatus.OK).body(dbrating);
 	}
 	
 }

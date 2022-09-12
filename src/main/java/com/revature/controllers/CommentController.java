@@ -18,7 +18,7 @@ import com.revature.models.Comment;
 import com.revature.services.CommentService;
 
 @RestController
-@RequestMapping("/comments/{gameId}")
+@RequestMapping("/comments")
 @CrossOrigin
 public class CommentController {
 	private CommentService commentService;
@@ -29,22 +29,29 @@ public class CommentController {
 		this.commentService = commentService;
 	}
 	
-	@GetMapping
+	@GetMapping("/{gameId}")
 	public ResponseEntity<List<Comment>> getCommentsByGameId(@PathVariable int gameId) {
 		List<Comment> comments = commentService.findCommentsByGameId(gameId);
+		if(comments.isEmpty()) {
+			ResponseEntity.status(HttpStatus.NO_CONTENT).body(comments);
+		}
 		return ResponseEntity.status(HttpStatus.OK).body(comments);
 	}
 	
 	@PostMapping
-	public  ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
-		Comment dbcomment = commentService.addOrUpdateComment(comment);
-		return ResponseEntity.status(HttpStatus.CREATED).body(dbcomment);
+	public  ResponseEntity<List<Comment>> createComment(@RequestBody Comment comment) {
+		List<Comment> comments = commentService.addOrUpdateComment(comment);
+		return ResponseEntity.status(HttpStatus.CREATED).body(comments);
 	}
 	
 	@PutMapping
-	public  ResponseEntity<Comment> updateComment(@RequestBody Comment comment) {
-		Comment dbcomment = commentService.addOrUpdateComment(comment);
-		return ResponseEntity.status(HttpStatus.CREATED).body(dbcomment);
+	public  ResponseEntity<List<Comment>> updateComment(@RequestBody Comment comment) {
+		List<Comment> comments = commentService.addOrUpdateComment(comment);
+		return ResponseEntity.status(HttpStatus.OK).body(comments);
 	}
 	
+//	public  ResponseEntity<List<Comment>> deleteComment(@RequestBody Comment comment) {
+//		List<Comment> comments = commentService.addOrUpdateComment(comment);
+//		return ResponseEntity.status(HttpStatus.OK).body(comments);
+//	}
 }
