@@ -23,8 +23,16 @@ public class UserService {
 		return uDao.findAll();
 	}
 	
-	public void addUser(Users u) {
-		uDao.save(u);
+	public Users addUser(Users u) {
+		return uDao.save(u);
 	}
-
+	
+	public Users findUserByUsernameAndPassword(String username, String password) {
+		return uDao.findByUsernameAndPassword(username, password);
+	}
+	
+	public Users findUserByUsername(String username) {
+		return uDao.findByUsername(username);
+	}
+	
 }
