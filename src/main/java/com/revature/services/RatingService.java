@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.Rating;
+import com.revature.models.Users;
 import com.revature.repositories.RatingRepo;
 
 @Service
@@ -28,6 +29,15 @@ public class RatingService {
 		}
 	}
 
+	public Rating findRatingByGameIdAndUsersId(int gameId, int usersId ) {
+		Optional<Rating> opt = ratingRepo.findByGameIdAndUsersId(gameId, usersId);
+		if (opt.isPresent()) {
+			return opt.get();
+		} else {
+			return null;
+		}
+	}
+	
 	public Rating addOrUpdateRating(Rating rating) {
 		return ratingRepo.save(rating);
 	}
