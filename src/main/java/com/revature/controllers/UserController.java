@@ -27,7 +27,6 @@ public class UserController {
 	
 	private UserService us;
 	private SesService ss;
-	private static Logger log = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	public UserController(UserService us, SesService ss) {
 		super();
@@ -39,7 +38,6 @@ public class UserController {
 	@GetMapping("register")
 	public ResponseEntity<List<Users>> getAllUsers() {
 		List<Users> users = us.findAllUsers();
-		log.info(users.toString());
 		return ResponseEntity.status(HttpStatus.OK).body(users);
 	}
 	//registers new user
@@ -48,7 +46,6 @@ public class UserController {
 		String usernameInput = u.getUsername();
 		if(usernameInput != null && !usernameInput.isEmpty()) {
 			Users user = us.findUserByUsername(usernameInput);
-			log.info(user.toString());
 			if(user != null) {
 				throw new Exception("Error: The user with the username " + usernameInput + " already exists. Please choose a different username.");
 			}
@@ -68,7 +65,6 @@ public class UserController {
 		}if(user == null) {
 			throw new Exception("Error: The username or password is incorrect.");
 		}
-		log.info(user.toString());
 		ss.makeSes(request.getRemoteAddr(), user);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(user);
