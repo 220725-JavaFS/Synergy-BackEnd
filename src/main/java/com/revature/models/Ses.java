@@ -2,7 +2,7 @@ package com.revature.models;
 
 import java.util.Objects;
 
-public class Session {
+public class Ses {
 	private String ip;
 	private Users user;
 	private boolean active;
@@ -19,7 +19,7 @@ public class Session {
 		return ip;
 	}
 
-	public Session(String ip, Users user, boolean active) {
+	public Ses(String ip, Users user, boolean active) {
 		super();
 		this.ip = ip;
 		this.user = user;
@@ -38,16 +38,16 @@ public class Session {
 		this.user = user;
 	}
 
-	public Session() {
+	public Ses() {
 		super();
 	}
 
-	public Session(Users user) {
+	public Ses(Users user) {
 		super();
 		this.user = user;
 	}
 
-	public Session(String ip, Users user) {
+	public Ses(String ip, Users user) {
 		super();
 		this.ip = ip;
 		this.user = user;
@@ -66,13 +66,13 @@ public class Session {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Session other = (Session) obj;
+		Ses other = (Ses) obj;
 		return active == other.active && Objects.equals(ip, other.ip) && Objects.equals(user, other.user);
 	}
 
 	@Override
 	public String toString() {
-		return "Session [ip=" + ip + ", user=" + user + ", active=" + active + "]";
+		return "Ses [ip=" + ip + ", user=" + user + ", active=" + active + "]";
 	}
 
 }

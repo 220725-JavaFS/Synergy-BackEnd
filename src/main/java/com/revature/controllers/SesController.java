@@ -12,26 +12,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.models.Session;
+import com.revature.models.Ses;
 import com.revature.models.Users;
-import com.revature.services.SessionService;
+import com.revature.services.SesService;
 
 @RestController
 @RequestMapping("/ses")
 @CrossOrigin
 public class SesController {
 
-	private SessionService sessionService;
+	private SesService sesService;
 
 	@Autowired
-		public SesController(SessionService sessionService) {
+		public SesController(SesService sesService) {
 			super();
-			this.sessionService = sessionService;
+			this.sesService = sesService;
 		}
 
 		@GetMapping
 		public ResponseEntity<Users> getSession(HttpServletRequest request) {
-			Session session = sessionService.getSession(request.getRemoteAddr());
+			Ses session = sesService.getSession(request.getRemoteAddr());
 			Users user = null;
 			if(session!=null) {
 				user = session.getUser();
@@ -40,11 +40,6 @@ public class SesController {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 		}
 
-	@PostMapping
-	public ResponseEntity<Users> storeActive(@RequestBody Users body, HttpServletRequest request) {
-		System.out.println(body.toString());
-		sessionService.makeSes(request.getRemoteAddr(), body);
-		return ResponseEntity.status(HttpStatus.OK).body(body);
-	}
+
 
 }

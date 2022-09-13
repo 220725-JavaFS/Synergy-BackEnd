@@ -5,20 +5,20 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.revature.models.Session;
+import com.revature.models.Ses;
 import com.revature.models.Users;
 
 @Service
-public class SessionService {
+public class SesService {
 
-	private Map<String, Session> sessions = new HashMap<String, Session>();
+	private Map<String, Ses> sessions = new HashMap<String, Ses>();
 
-	public Session getSession(String ip) {
+	public Ses getSession(String ip) {
 		return sessions.get(ip);
 	}
 
 	public void makeSes(String ip, Users user) {
-		Session session = new Session(ip, user, true);
+		Ses session = new Ses(ip, user, true);
 		sessions.put(ip, session);
 	}
 	
