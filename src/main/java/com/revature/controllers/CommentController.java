@@ -40,6 +40,7 @@ public class CommentController {
 	
 	@PostMapping
 	public  ResponseEntity<List<Comment>> createComment(@RequestBody Comment comment) {
+		System.out.println(comment);
 		List<Comment> comments = commentService.addOrUpdateComment(comment);
 		return ResponseEntity.status(HttpStatus.CREATED).body(comments);
 	}

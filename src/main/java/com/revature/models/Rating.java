@@ -33,9 +33,9 @@ public class Rating {
 		super();
 	}
 
-	public Rating(Users Users, int gameId, int rating) {
+	public Rating(Users users, int gameId, int rating) {
 		super();
-		this.users = Users;
+		this.users = users;
 		this.gameId = gameId;
 		this.rating = rating;
 	}
@@ -60,8 +60,8 @@ public class Rating {
 		return users;
 	}
 
-	public void setUsers(Users users) {
-		this.users = users;
+	public void setUsers(Users Users) {
+		this.users = Users;
 	}
 
 	public int getGameId() {

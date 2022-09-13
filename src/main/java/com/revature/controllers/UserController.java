@@ -2,18 +2,20 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Users;
+import com.revature.services.SesService;
 import com.revature.services.UserService;
 
 @RestController
@@ -22,11 +24,13 @@ import com.revature.services.UserService;
 public class UserController {
 	
 	private UserService us;
+	private SesService ss;
 	
 	@Autowired
-	public UserController(UserService us) {
+	public UserController(UserService us, SesService ss) {
 		super();
 		this.us = us;
+		this.ss = ss;
 	}
 	
 	//for viewing info persistence from front to back end
@@ -51,7 +55,7 @@ public class UserController {
 	}
 	//logs in user with username and password
 	@PostMapping("login")
-	public ResponseEntity<Users> loginUser(@RequestBody Users u) throws Exception {
+	public ResponseEntity<Users> loginUser(@RequestBody Users u, HttpServletRequest request) throws Exception {
 		String usernameInput = u.getUsername();
 		String passwordInput = u.getPassword();
 		Users user = null;
@@ -60,7 +64,12 @@ public class UserController {
 		}if(user == null) {
 			throw new Exception("Error: The username or password is incorrect.");
 		}
+		
+		ss.makeSes(request.getRemoteAddr(), user);
+		
 		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
+	
+	
 
 }
