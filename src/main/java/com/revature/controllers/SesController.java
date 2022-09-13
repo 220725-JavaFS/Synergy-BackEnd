@@ -24,6 +24,7 @@ import com.revature.services.SesService;
 public class SesController {
 
 	private SesService sesService;
+	private static Logger log = LoggerFactory.getLogger(SesController.class);
 	
 	@Autowired
 		public SesController(SesService sesService) {
@@ -37,6 +38,11 @@ public class SesController {
 			Users user = null;
 			if(session!=null) {
 				user = session.getUser();
+				
+				if(user != null) {
+					log.info(user.toString());
+				}
+				
 				return ResponseEntity.status(HttpStatus.OK).body(user);
 			}
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
