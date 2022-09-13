@@ -2,6 +2,8 @@ package com.revature.controllers;
 
 import java.util.Collections;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,7 +23,7 @@ import com.revature.models.Game;
 @RequestMapping("/games")
 @CrossOrigin
 public class GamesController {
-
+	private static Logger log = LoggerFactory.getLogger(GamesController.class);
 	@PostMapping
 	public ResponseEntity<Game[]> getGames(@RequestBody String body) {
 		String uri = "https://api.igdb.com/v4/games";
@@ -35,6 +37,7 @@ public class GamesController {
 		HttpEntity<String> entity = new HttpEntity<>(body, headers);
 
 		Game[] games = rest.postForObject(uri, entity, Game[].class);
+		log.info(games.toString());
 		if (games == null) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(games);
 		}
@@ -54,11 +57,12 @@ public class GamesController {
 		HttpEntity<String> entity = new HttpEntity<>(body, headers);
 
 		Game[] games = rest.postForObject(uri, entity, Game[].class);
-
+		
 		if (games.length == 0) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 		}
 		Game game = games[0];
+		log.info(game.toString());
 		return ResponseEntity.status(HttpStatus.OK).body(game);
 	}
 	
@@ -75,7 +79,7 @@ public class GamesController {
 		HttpEntity<String> entity = new HttpEntity<>(body, headers);
 
 		Cover[] covers = rest.postForObject(uri, entity, Cover[].class);
-
+		log.info(covers.toString());
 		if (covers.length == 0) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 		}
