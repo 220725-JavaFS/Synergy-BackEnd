@@ -35,6 +35,7 @@ public class CommentController {
 		if(comments.isEmpty()) {
 			ResponseEntity.status(HttpStatus.NO_CONTENT).body(comments);
 		}
+		System.out.println(comments);
 		return ResponseEntity.status(HttpStatus.OK).body(comments);
 	}
 	

@@ -21,7 +21,6 @@ public class Comment {
 	private int id;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn
-	@JsonBackReference
 	private Users users;
 	@Column(nullable = false)
 	private int gameId;
