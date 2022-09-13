@@ -2,6 +2,8 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,7 @@ import com.revature.services.CommentService;
 @CrossOrigin
 public class CommentController {
 	private CommentService commentService;
-	
+	private static Logger log = LoggerFactory.getLogger(CommentController.class);
 	@Autowired
 	public CommentController(CommentService commentService) {
 		super();
@@ -32,6 +34,7 @@ public class CommentController {
 	@GetMapping("/{gameId}")
 	public ResponseEntity<List<Comment>> getCommentsByGameId(@PathVariable int gameId) {
 		List<Comment> comments = commentService.findCommentsByGameId(gameId);
+		log.info(comments.toString());
 		if(comments.isEmpty()) {
 			ResponseEntity.status(HttpStatus.NO_CONTENT).body(comments);
 		}
@@ -43,12 +46,14 @@ public class CommentController {
 	public  ResponseEntity<List<Comment>> createComment(@RequestBody Comment comment) {
 		System.out.println(comment);
 		List<Comment> comments = commentService.addOrUpdateComment(comment);
+		log.info(comments.toString());
 		return ResponseEntity.status(HttpStatus.CREATED).body(comments);
 	}
 	
 	@PutMapping
 	public  ResponseEntity<List<Comment>> updateComment(@RequestBody Comment comment) {
 		List<Comment> comments = commentService.addOrUpdateComment(comment);
+		log.info(comments.toString());
 		return ResponseEntity.status(HttpStatus.OK).body(comments);
 	}
 	
